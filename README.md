@@ -62,3 +62,19 @@ worker.onmessage = function (event) {
 	console.log(event);
 };
 ```
+
+Eval in worker
+```javascript
+// in worker
+onmessage = function(ev){
+	this.eval(`(${ev.data.func})\n//# sourceURL=workerJS:///workerEval${Date.now()}.js`)
+		.apply(this,ev.data.argList);
+};
+```
+```javascript
+// in main script
+this.postMessage({
+	func:func.toString(),
+	argList,
+});
+```
