@@ -35,3 +35,29 @@ worker.onmessage = function (event) {
 	console.log(event);
 };
 ```
+
+DataURI version
+```javascript
+var createDataURLWorker = function(workerFunction){
+	"use strict";
+	var func2str = function(func){
+		return func.toString().replace(/^function.+\{?|\}$/g, '') + `\n//# sourceURL=workerJS:///worker${Date.now()}.js`;
+	};
+	var dataurl = 'data:text/javascript,' + encodeURIComponent(func2str(workerFunction));
+	var worker = new Worker(dataurl);
+	return worker;
+};
+
+var worker = createDataURLWorker(function(){
+	self.onmessage = function (event) {
+		console.log(event);
+		postMessage('bar');
+	}
+});
+
+worker.postMessage('foo');
+
+worker.onmessage = function (event) {
+	console.log(event);
+};
+```
