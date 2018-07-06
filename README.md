@@ -13,7 +13,7 @@ var createBlobWorker = function(workerFunction){
 	 */
 	var Blob = window.Blob || window.WebKitBlob || window.MozBlob;
 	var workerBlob = new Blob(
-		[workerFunction.toString().replace(/^function .+\{?|\}$/g, '')],
+		[workerFunction.toString().replace(/^function.+\{?|\}$/g, '')],
 		{ type: 'text/javascript' }
 	);
 	var workerBlobUrl = URL.createObjectURL(workerBlob);
