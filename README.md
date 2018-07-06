@@ -1,6 +1,7 @@
 # blob-worker
 Writing workers without separated files.
 
+BLOB version
 ```javascript
 var createBlobWorker = function(workerFunction){
 	"use strict";
