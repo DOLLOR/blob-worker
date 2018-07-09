@@ -73,7 +73,7 @@ onmessage = function(ev){
 ```
 ```javascript
 // in main script
-this.postMessage({
+worker.postMessage({
 	func:func.toString(),
 	argList,
 });
